@@ -6,11 +6,21 @@ Build the app
 go build -o zent main.go
 ```
 
+```
+go install
+```
+
+## Completed
+
+- Add a delete command – remove transactions by ID. ✔️
+- Switch to SQLite – more scalable, allows queries, avoids reading/writing full
+  JSON. ✔️
+- Move ledger file to user config directory – e.g., ~/.ledger/ledger.json. ✔️
+
 ## Goals!
 
 💡 CLI / UX Improvements
 
-- Add a delete command – remove transactions by ID. ✔️
 - Add an edit command – modify amount, description, or timestamp for a given ID.
 - Filter transactions – by date range, description keyword, or amount range.
 - Search transactions – keyword search in descriptions.
@@ -30,9 +40,6 @@ go build -o zent main.go
 
 🗄️ Storage / Architecture
 
-- Switch to SQLite – more scalable, allows queries, avoids reading/writing full
-  JSON.
-- Move ledger file to user config directory – e.g., ~/.ledger/ledger.json.
 - Backup / version history – keep previous versions of ledger in case of
   mistakes.
 - Encryption / password protection – store sensitive financial data securely.
