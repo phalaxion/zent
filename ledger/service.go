@@ -9,6 +9,7 @@ import (
 type Store interface {
 	RecordTransaction(t Transaction) error
 	ListTransactions() ([]Transaction, error)
+	GetTransaction(id string) (*Transaction, error)
 }
 
 type Service struct {
@@ -32,6 +33,10 @@ func (s *Service) Add(amount float64, description string) error {
 
 func (s *Service) List() ([]Transaction, error) {
 	return s.store.ListTransactions()
+}
+
+func (s *Service) Get(id string) (*Transaction, error) {
+	return s.store.GetTransaction(id)
 }
 
 func (s *Service) Balance() (float64, error) {

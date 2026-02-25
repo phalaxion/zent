@@ -34,6 +34,21 @@ func (s *JSONStore) ListTransactions() ([]ledger.Transaction, error) {
 	return lf.Transactions, nil
 }
 
+func (s *JSONStore) GetTransaction(id string) (*ledger.Transaction, error) {
+	lf, err := s.load()
+	if err != nil {
+		return nil, err
+	}
+
+	for _, transaction := range lf.Transactions {
+		if transaction.ID == id {
+			return &transaction, nil
+		}
+	}
+
+	return nil, fmt.Errorf("transaction not found")
+}
+
 func (s *JSONStore) load() (*ledgerFile, error) {
 	file, err := os.Open(s.FilePath)
 	if errors.Is(err, os.ErrNotExist) {
