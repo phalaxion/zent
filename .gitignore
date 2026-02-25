@@ -1,5 +1,6 @@
 # Storage data file
 ledger.json
+ledger.db
 
 # Compiled App
 zent

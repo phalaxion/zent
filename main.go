@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/phalaxion/zent/cmd"
 	"github.com/phalaxion/zent/ledger"
@@ -11,11 +12,29 @@ import (
 )
 
 func main() {
-	jsonStore := &store.JSONStore{
-		FilePath: "ledger.json",
+	dbPath := os.Getenv("ZENT_DB")
+
+	if dbPath == "" {
+		configDir, err := os.UserConfigDir()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		appDir := filepath.Join(configDir, "zent")
+
+		if err := os.MkdirAll(appDir, 0755); err != nil {
+			log.Fatal(err)
+		}
+
+		dbPath = filepath.Join(appDir, "ledger.db")
 	}
 
-	service := ledger.NewService(jsonStore)
+	sqliteStore, err := store.NewSQLiteStore(dbPath)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	service := ledger.NewService(sqliteStore)
 
 	app := cmd.NewApp(service)
 
