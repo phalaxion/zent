@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/phalaxion/zent/internal/format"
+	"github.com/phalaxion/zent/internal"
 	"github.com/phalaxion/zent/ledger"
 	"github.com/urfave/cli/v3"
 )
@@ -28,7 +28,7 @@ func getCommand(service *ledger.Service) *cli.Command {
 				"%s | %s | %10s | %s\n",
 				transaction.ID,
 				transaction.Timestamp.Format("2006-01-02 15:04:05"),
-				format.Currency(transaction.Amount),
+				internal.FormatCurrency(transaction.Amount),
 				transaction.Description,
 			)
 

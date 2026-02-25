@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/phalaxion/zent/internal/format"
+	"github.com/phalaxion/zent/internal"
 	"github.com/phalaxion/zent/ledger"
 	"github.com/urfave/cli/v3"
 )
@@ -19,7 +19,7 @@ func balanceCommand(service *ledger.Service) *cli.Command {
 				return err
 			}
 
-			fmt.Println("Current balance:", format.Currency(balance))
+			fmt.Println("Current balance:", internal.FormatCurrency(balance))
 			return nil
 		},
 	}
