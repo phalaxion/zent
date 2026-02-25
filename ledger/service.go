@@ -10,6 +10,7 @@ type Store interface {
 	RecordTransaction(t Transaction) error
 	ListTransactions() ([]Transaction, error)
 	GetTransaction(id string) (*Transaction, error)
+	DeleteTransaction(id string) error
 }
 
 type Service struct {
@@ -37,6 +38,10 @@ func (s *Service) List() ([]Transaction, error) {
 
 func (s *Service) Get(id string) (*Transaction, error) {
 	return s.store.GetTransaction(id)
+}
+
+func (s *Service) Delete(id string) error {
+	return s.store.DeleteTransaction(id)
 }
 
 func (s *Service) Balance() (float64, error) {

@@ -12,6 +12,7 @@ func NewApp(service *ledger.Service) *cli.Command {
 			balanceCommand(service),
 			listCommand(service),
 			getCommand(service),
+			deleteCommand(service),
 		},
 	}
 }

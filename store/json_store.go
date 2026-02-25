@@ -3,7 +3,9 @@ package store
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
+	"slices"
 
 	"github.com/phalaxion/zent/ledger"
 )
@@ -47,6 +49,22 @@ func (s *JSONStore) GetTransaction(id string) (*ledger.Transaction, error) {
 	}
 
 	return nil, fmt.Errorf("transaction not found")
+}
+
+func (s *JSONStore) DeleteTransaction(id string) error {
+	lf, err := s.load()
+	if err != nil {
+		return err
+	}
+
+	for i, transaction := range lf.Transactions {
+		if transaction.ID == id {
+			lf.Transactions = slices.Delete(lf.Transactions, i, i+1)
+			return s.save(lf)
+		}
+	}
+
+	return fmt.Errorf("transaction not found")
 }
 
 func (s *JSONStore) load() (*ledgerFile, error) {

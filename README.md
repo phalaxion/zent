@@ -1,8 +1,16 @@
+## Helpful Commands
+
+Build the app
+
+```
+go build -o zent main.go
+```
+
 ## Goals!
 
 💡 CLI / UX Improvements
 
-- Add a delete command – remove transactions by ID.
+- Add a delete command – remove transactions by ID. ✔️
 - Add an edit command – modify amount, description, or timestamp for a given ID.
 - Filter transactions – by date range, description keyword, or amount range.
 - Search transactions – keyword search in descriptions.
